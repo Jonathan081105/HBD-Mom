@@ -1,914 +1,549 @@
 <!DOCTYPE html>
 <html lang="id">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Happy Birthday, My Mom 💖</title>
-    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
-    <link
-        href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Quicksand:wght@300;400;600&display=swap"
-        rel="stylesheet">
+    <meta name="theme-color" content="#6f3f3d">
+    <title>Untuk Mama, Dengan Seluruh Cintaku</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@300;400;500;600&family=Gloock&family=Great+Vibes&display=swap" rel="stylesheet">
     <style>
-        html {
-            scroll-behavior: smooth;
+        :root {
+            --ink: #493634;
+            --wine: #6f3f3d;
+            --rose: #b97872;
+            --blush: #ead0ca;
+            --paper: #fffaf2;
+            --cream: #f8eee2;
+            --gold: #b58a52;
         }
 
+        * { box-sizing: border-box; }
+        html { scroll-behavior: smooth; }
         body {
-            background: linear-gradient(to bottom, #2d0107, #3b020a, #120002);
-            color: #fff;
-            font-family: 'Quicksand', sans-serif;
+            margin: 0;
+            color: var(--ink);
+            background: var(--paper);
+            font-family: "DM Sans", sans-serif;
+            overflow-x: hidden;
         }
+        img { display: block; width: 100%; }
+        button { font: inherit; }
 
-        .font-cursive {
-            font-family: 'Great Vibes', cursive;
-        }
-
-        .font-serif-elegant {
-            font-family: 'Playfair Display', serif;
-        }
-
-        .polaroid {
-            background: #fafaf7;
-            padding: 12px 12px 24px 12px;
-            box-shadow: 0 12px 28px rgba(0, 0, 0, 0.5);
+        .lock {
+            position: fixed;
+            inset: 0;
+            z-index: 1000;
+            display: grid;
+            place-items: center;
+            padding: 24px;
+            color: white;
             text-align: center;
-            color: #27272a;
-            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-            position: relative;
+            background:
+                linear-gradient(rgba(65, 34, 34, .72), rgba(65, 34, 34, .82)),
+                url("images/foto1.jpg") center 28% / cover;
+            transition: opacity .8s ease, visibility .8s ease;
         }
+        .lock.open { opacity: 0; visibility: hidden; }
+        .lock-card {
+            width: min(430px, 100%);
+            padding: 46px 32px;
+            border: 1px solid rgba(255,255,255,.3);
+            border-radius: 28px;
+            background: rgba(61, 35, 34, .4);
+            box-shadow: 0 30px 90px rgba(31, 15, 14, .38);
+            backdrop-filter: blur(16px);
+        }
+        .lock-flower { font-size: 48px; }
+        .eyebrow {
+            margin: 0 0 14px;
+            color: var(--gold);
+            font-size: 11px;
+            font-weight: 600;
+            letter-spacing: .3em;
+            text-transform: uppercase;
+        }
+        .lock .eyebrow { color: #f1d4ad; }
+        .lock h1 {
+            margin: 8px 0 12px;
+            font-family: "Gloock", serif;
+            font-size: clamp(34px, 8vw, 48px);
+            font-weight: 400;
+        }
+        .lock p { color: rgba(255,255,255,.76); line-height: 1.7; }
+        .pin {
+            width: 190px;
+            margin: 14px 0;
+            padding: 13px;
+            color: white;
+            border: 0;
+            border-bottom: 1px solid rgba(255,255,255,.6);
+            outline: 0;
+            background: transparent;
+            font-size: 25px;
+            letter-spacing: .35em;
+            text-align: center;
+        }
+        .open-button {
+            display: block;
+            width: 100%;
+            margin-top: 18px;
+            padding: 15px;
+            color: var(--wine);
+            border: 0;
+            border-radius: 999px;
+            background: #f7e7d2;
+            font-weight: 600;
+            cursor: pointer;
+            transition: transform .25s, background .25s;
+        }
+        .open-button:hover { transform: translateY(-2px); background: white; }
+        .pin-error { display: none; margin: 14px 0 0 !important; color: #ffd6d6 !important; font-size: 13px; }
 
-        .polaroid::before {
+        main { opacity: 0; transition: opacity 1.2s ease; }
+        main.visible { opacity: 1; }
+        .hero {
+            min-height: 100vh;
+            display: grid;
+            grid-template-columns: 1.05fr .95fr;
+            background: var(--cream);
+        }
+        .hero-copy {
+            position: relative;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            padding: 9vw;
+            overflow: hidden;
+        }
+        .hero-copy::before {
+            content: "Mama";
+            position: absolute;
+            left: -20px;
+            bottom: -35px;
+            color: rgba(185,120,114,.08);
+            font: 190px/1 "Great Vibes", cursive;
+        }
+        .hero h2 {
+            position: relative;
+            margin: 0;
+            font-family: "Gloock", serif;
+            font-size: clamp(55px, 7.5vw, 112px);
+            font-weight: 400;
+            line-height: .94;
+            letter-spacing: -.04em;
+        }
+        .hero h2 em {
+            display: block;
+            color: var(--rose);
+            font: 400 1.05em/1 "Great Vibes", cursive;
+        }
+        .hero-note {
+            max-width: 480px;
+            margin: 30px 0 0;
+            padding-left: 24px;
+            border-left: 1px solid var(--gold);
+            font-family: "Gloock", serif;
+            font-size: 18px;
+            line-height: 1.7;
+        }
+        .hero-photo { position: relative; min-height: 650px; overflow: hidden; }
+        .hero-photo img { height: 100%; object-fit: cover; object-position: center 24%; }
+        .hero-photo::after {
             content: "";
             position: absolute;
-            top: -14px;
-            left: 50%;
-            transform: translateX(-50%) rotate(-3deg);
-            width: 70px;
-            height: 22px;
-            background-color: rgba(255, 255, 255, 0.35);
-            backdrop-filter: blur(1px);
-            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
-            border-left: 1px dashed rgba(0, 0, 0, 0.1);
-            border-right: 1px dashed rgba(0, 0, 0, 0.1);
+            inset: 0;
+            background: linear-gradient(to top, rgba(58,31,30,.45), transparent 48%);
         }
-
-        .polaroid:hover {
-            transform: scale(1.08) rotate(0deg) !important;
-            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.8);
-            z-index: 20;
-        }
-
-        @keyframes spin-slow {
-            from {
-                transform: rotate(0deg);
-            }
-
-            to {
-                transform: rotate(360deg);
-            }
-        }
-
-        .vinyl-animation {
-            animation: spin-slow 10s linear infinite;
-        }
-
-        /* Pop-up Letter Styles */
-        .letter-paper {
-            background-color: #fdfcf0;
-            background-image: radial-gradient(#d1d1d1 1px, transparent 1px);
-            background-size: 20px 20px;
-            color: #444;
-            font-family: 'Playfair Display', Georgia, serif;
-            line-height: 1.8;
-            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.7);
-        }
-
-        .modal-overlay {
-            display: none;
-            background: rgba(0, 0, 0, 0.85);
+        .hero-date {
+            position: absolute;
+            z-index: 2;
+            right: 28px;
+            bottom: 28px;
+            padding: 12px 18px;
+            color: white;
+            border: 1px solid rgba(255,255,255,.45);
+            border-radius: 999px;
+            background: rgba(60,34,33,.25);
+            font-size: 11px;
+            letter-spacing: .22em;
             backdrop-filter: blur(8px);
         }
 
-        .modal-active {
-            display: flex;
-            animation: fadeIn 0.5s forwards;
+        .intro {
+            padding: 130px 24px;
+            text-align: center;
+            background: var(--paper);
         }
-
-        @keyframes fadeIn {
-            from {
-                opacity: 0;
-                transform: scale(0.9);
-            }
-
-            to {
-                opacity: 1;
-                transform: scale(1);
-            }
-        }
-
-        /* Folder Scrapbook Animation Styles */
-        .folder-wrapper {
-            perspective: 1000px;
-            position: relative;
-            width: 280px;
-            height: 190px;
+        .intro blockquote {
+            max-width: 850px;
             margin: 0 auto;
+            font: 400 clamp(28px, 4vw, 52px)/1.42 "Gloock", serif;
         }
-        .folder-back {
-            background: #5c1d24; /* Dark red/maroon folder back */
-            border-radius: 16px;
-            border: 1px solid rgba(244, 63, 94, 0.2);
-            box-shadow: inset 0 2px 5px rgba(255,255,255,0.05), 0 10px 25px rgba(0,0,0,0.6);
-        }
-        .folder-front {
-            background: #802c35; /* Lighter maroon folder front */
-            border-radius: 16px;
-            transform-origin: bottom;
-            transition: transform 0.8s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-            box-shadow: 0 -4px 15px rgba(0,0,0,0.4);
-            border-top: 1px solid rgba(255,255,255,0.1);
-        }
-        .photo-card {
-            position: absolute;
-            bottom: 20px;
-            left: 50%;
-            transform: translateX(-50%) translate(0, 0) scale(0.6) rotate(0deg);
-            opacity: 0;
-            transition: all 0.8s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-            pointer-events: none;
-            z-index: 10;
-        }
-        .folder-open .photo-card {
-            pointer-events: auto;
-            opacity: 1;
-        }
-        .folder-open .folder-front {
-            transform: rotateX(-55deg);
-        }
-        /* Staggered fan-out translations on unlock for 5 photos */
-        @media (min-width: 768px) {
-            .folder-open .photo-1 {
-                transform: translateX(-240%) translateY(-50px) rotate(-15deg) scale(1.05);
-            }
-            .folder-open .photo-2 {
-                transform: translateX(-145%) translateY(-90px) rotate(-7deg) scale(1.05);
-            }
-            .folder-open .photo-3 {
-                transform: translateX(-50%) translateY(-110px) rotate(0deg) scale(1.05);
-            }
-            .folder-open .photo-4 {
-                transform: translateX(45%) translateY(-90px) rotate(7deg) scale(1.05);
-            }
-            .folder-open .photo-5 {
-                transform: translateX(140%) translateY(-50px) rotate(15deg) scale(1.05);
-            }
-        }
-        @media (max-width: 767px) {
-            .folder-open .photo-1 {
-                transform: translateX(-150%) translateY(-80px) rotate(-12deg) scale(0.9);
-            }
-            .folder-open .photo-2 {
-                transform: translateX(-105%) translateY(-110px) rotate(-6deg) scale(0.9);
-            }
-            .folder-open .photo-3 {
-                transform: translateX(-50%) translateY(-130px) rotate(0deg) scale(0.9);
-            }
-            .folder-open .photo-4 {
-                transform: translateX(5%) translateY(-110px) rotate(6deg) scale(0.9);
-            }
-            .folder-open .photo-5 {
-                transform: translateX(50%) translateY(-80px) rotate(12deg) scale(0.9);
-            }
-        }
+        .intro blockquote span { color: var(--rose); }
+        .small-heart { margin-top: 32px; color: var(--rose); font-size: 22px; }
 
-        /* A warm, editorial birthday experience for Mom */
-        :root {
-            --wine: #3a1019;
-            --rose: #b76e79;
-            --blush: #f2d7d9;
-            --cream: #fff8ee;
-            --gold: #d9b36c;
+        .story {
+            padding: 120px 6vw;
+            background: #75504d;
+            color: white;
         }
-
-        body {
-            background:
-                radial-gradient(circle at 10% 10%, rgba(217, 179, 108, .14), transparent 28rem),
-                radial-gradient(circle at 90% 35%, rgba(183, 110, 121, .2), transparent 32rem),
-                linear-gradient(160deg, #18080d 0%, var(--wine) 42%, #16070b 100%);
+        .story-heading {
+            max-width: 1200px;
+            margin: 0 auto 70px;
+            display: flex;
+            align-items: end;
+            justify-content: space-between;
+            gap: 30px;
         }
-
-        body::before {
-            content: "";
-            position: fixed;
-            inset: 0;
-            pointer-events: none;
-            z-index: -1;
-            opacity: .34;
-            background-image: url("data:image/svg+xml,%3Csvg width='90' height='90' viewBox='0 0 90 90' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M45 12c7 10 16 15 27 16-8 8-11 17-9 28-10-5-20-5-30 0 2-11-1-20-9-28 11-1 20-6 21-16Z' fill='none' stroke='%23d9b36c' stroke-opacity='.12'/%3E%3C/svg%3E");
+        .story-heading h3 {
+            max-width: 650px;
+            margin: 0;
+            font: 400 clamp(42px, 6vw, 78px)/1.05 "Gloock", serif;
         }
-
-        section {
-            position: relative;
+        .story-heading p { max-width: 330px; color: rgba(255,255,255,.7); line-height: 1.7; }
+        .gallery {
+            max-width: 1200px;
+            margin: auto;
+            display: grid;
+            grid-template-columns: repeat(12, 1fr);
+            gap: 25px;
+            align-items: start;
         }
-
-        section:not(:first-child)::before {
-            content: "✦";
-            display: block;
-            width: max-content;
-            margin: 0 auto 1.5rem;
-            color: var(--gold);
-            font-size: 1.25rem;
-            letter-spacing: .8rem;
-            text-shadow: 0 0 20px rgba(217, 179, 108, .65);
-        }
-
-        .mom-glass {
-            background: linear-gradient(145deg, rgba(255, 248, 238, .12), rgba(255, 255, 255, .035));
-            border: 1px solid rgba(242, 215, 217, .22);
-            box-shadow: 0 30px 80px rgba(0, 0, 0, .3), inset 0 1px rgba(255, 255, 255, .15);
-            backdrop-filter: blur(18px);
-        }
-
-        .gold-kicker {
-            color: var(--gold);
-            font-size: .72rem;
-            font-weight: 600;
-            letter-spacing: .34em;
-            text-transform: uppercase;
-        }
-
-        .hero-portrait {
-            position: relative;
-            width: min(70vw, 340px);
-            aspect-ratio: 4 / 5;
-            padding: 10px;
-            border: 1px solid rgba(217, 179, 108, .55);
-            border-radius: 48% 48% 20px 20px;
-            box-shadow: 0 35px 80px rgba(0, 0, 0, .55), 0 0 60px rgba(183, 110, 121, .22);
-        }
-
-        .hero-portrait::before,
-        .hero-portrait::after {
-            content: "❀";
-            position: absolute;
-            color: var(--gold);
-            font-size: 2.4rem;
-            text-shadow: 0 5px 20px rgba(0, 0, 0, .45);
-            z-index: 2;
-        }
-
-        .hero-portrait::before { top: 8%; left: -24px; transform: rotate(-18deg); }
-        .hero-portrait::after { right: -22px; bottom: 12%; transform: rotate(20deg); }
-
-        .hero-portrait img {
-            width: 100%;
+        .photo { position: relative; margin: 0; }
+        .photo img {
             height: 100%;
             object-fit: cover;
-            border-radius: 48% 48% 14px 14px;
-            filter: saturate(.9) contrast(1.03);
+            border-radius: 3px;
+            box-shadow: 0 24px 60px rgba(41,20,19,.28);
+        }
+        .photo figcaption {
+            margin-top: 12px;
+            color: rgba(255,255,255,.66);
+            font: italic 15px "Gloock", serif;
+        }
+        .photo.one { grid-column: 1 / span 7; height: 720px; }
+        .photo.two { grid-column: 9 / span 4; height: 490px; margin-top: 110px; }
+        .photo.three { grid-column: 2 / span 4; height: 510px; margin-top: 65px; }
+        .photo.four { grid-column: 7 / span 6; height: 690px; margin-top: -40px; }
+
+        .gratitude {
+            display: grid;
+            grid-template-columns: .9fr 1.1fr;
+            min-height: 780px;
+            background: var(--cream);
+        }
+        .gratitude-image { min-height: 620px; }
+        .gratitude-image img { height: 100%; object-fit: cover; object-position: center; }
+        .gratitude-copy {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            padding: 10vw;
+        }
+        .gratitude h3, .apology h3, .wish h3 {
+            margin: 0 0 28px;
+            font: 400 clamp(40px, 5vw, 70px)/1.08 "Gloock", serif;
+        }
+        .gratitude-copy p {
+            max-width: 570px;
+            margin: 0 0 18px;
+            font-size: 17px;
+            line-height: 1.9;
         }
 
-        .hero-title {
-            background: linear-gradient(120deg, #fff8ee, #f0cfa0 48%, #f2d7d9);
-            -webkit-background-clip: text;
-            background-clip: text;
-            color: transparent;
-            text-shadow: 0 12px 35px rgba(0, 0, 0, .2);
+        .apology {
+            position: relative;
+            padding: 140px 24px;
+            background: #e8cbc4;
+            overflow: hidden;
         }
-
-        .petal {
+        .apology::before {
+            content: "maaf";
             position: absolute;
-            color: rgba(242, 215, 217, .55);
-            animation: float-petal 7s ease-in-out infinite;
+            top: -55px;
+            right: -20px;
+            color: rgba(255,255,255,.35);
+            font: 240px "Great Vibes", cursive;
+        }
+        .letter {
+            position: relative;
+            max-width: 820px;
+            margin: auto;
+            padding: clamp(38px, 7vw, 85px);
+            background: var(--paper);
+            box-shadow: 0 40px 100px rgba(83,48,45,.15);
+        }
+        .letter::before {
+            content: "";
+            position: absolute;
+            inset: 16px;
+            border: 1px solid rgba(181,138,82,.35);
             pointer-events: none;
         }
-
-        .petal:nth-child(2) { animation-delay: -2s; }
-        .petal:nth-child(3) { animation-delay: -4s; }
-
-        @keyframes float-petal {
-            0%, 100% { transform: translateY(0) rotate(-12deg); opacity: .25; }
-            50% { transform: translateY(-28px) rotate(12deg); opacity: .8; }
+        .letter h3 { color: var(--wine); text-align: center; }
+        .letter p {
+            position: relative;
+            margin: 0 0 19px;
+            font-family: "Gloock", serif;
+            font-size: 17px;
+            line-height: 1.9;
+        }
+        .signature {
+            margin-top: 42px !important;
+            color: var(--rose);
+            font: 38px "Great Vibes", cursive !important;
+            text-align: right;
         }
 
-        .polaroid {
-            background: var(--cream);
-            border: 1px solid rgba(217, 179, 108, .35);
-            box-shadow: 0 18px 45px rgba(15, 3, 7, .42);
+        .final-gallery {
+            padding: 120px 5vw;
+            background: var(--paper);
+        }
+        .final-grid {
+            max-width: 1150px;
+            margin: auto;
+            display: grid;
+            grid-template-columns: 1fr 1.15fr 1fr;
+            gap: 22px;
+            align-items: center;
+        }
+        .final-grid img {
+            height: 510px;
+            object-fit: cover;
+            box-shadow: 0 22px 55px rgba(83,48,45,.13);
+        }
+        .final-grid img:nth-child(2) { height: 640px; }
+
+        .wish {
+            position: relative;
+            padding: 150px 24px 110px;
+            color: white;
+            text-align: center;
+            background:
+                linear-gradient(rgba(66,35,34,.75), rgba(66,35,34,.9)),
+                url("images/foto6.jpg") center 30% / cover fixed;
+        }
+        .wish > * { position: relative; }
+        .wish h3 { max-width: 800px; margin: 0 auto 25px; }
+        .wish p { max-width: 630px; margin: auto; color: rgba(255,255,255,.8); font-size: 17px; line-height: 1.9; }
+
+        .music {
+            max-width: 680px;
+            margin: 50px auto 0;
+            padding: 12px;
+            border: 1px solid rgba(255,255,255,.25);
+            border-radius: 18px;
+            background: rgba(255,255,255,.08);
+            backdrop-filter: blur(12px);
+        }
+        .music iframe { width: 100%; aspect-ratio: 16/9; border: 0; border-radius: 10px; }
+        footer { padding: 30px; color: rgba(255,255,255,.62); background: #422524; text-align: center; font-size: 12px; letter-spacing: .14em; }
+
+        .reveal { opacity: 0; transform: translateY(38px); transition: opacity .9s ease, transform .9s ease; }
+        .reveal.seen { opacity: 1; transform: none; }
+
+        .petal {
+            position: fixed;
+            z-index: 999;
+            top: -30px;
+            color: #e5b5ad;
+            pointer-events: none;
+            animation: fall linear forwards;
+        }
+        @keyframes fall { to { transform: translate3d(var(--drift), 110vh, 0) rotate(420deg); opacity: 0; } }
+
+        @media (max-width: 800px) {
+            .hero, .gratitude { grid-template-columns: 1fr; }
+            .hero-copy { min-height: 65vh; padding: 100px 28px 70px; }
+            .hero-photo { min-height: 62vh; }
+            .story { padding: 95px 20px; }
+            .story-heading { display: block; }
+            .story-heading p { margin-top: 24px; }
+            .gallery { display: grid; grid-template-columns: 1fr 1fr; gap: 15px; }
+            .photo.one, .photo.two, .photo.three, .photo.four { grid-column: auto; height: 380px; margin-top: 0; }
+            .photo.one, .photo.four { grid-column: 1 / -1; height: 520px; }
+            .gratitude-image { min-height: 70vh; }
+            .gratitude-copy { padding: 90px 28px; }
+            .final-grid { grid-template-columns: 1fr 1fr; }
+            .final-grid img, .final-grid img:nth-child(2) { height: 430px; }
+            .final-grid img:nth-child(2) { grid-row: span 2; height: 882px; }
+            .wish { background-attachment: scroll; }
         }
 
-        .letter-paper {
-            background-color: var(--cream);
-            background-image: linear-gradient(rgba(217, 179, 108, .12) 1px, transparent 1px);
-            background-size: 100% 30px;
-            border: 1px solid #ead5ac;
-            box-shadow: 0 35px 100px rgba(0, 0, 0, .72);
+        @media (max-width: 500px) {
+            .intro { padding: 95px 24px; }
+            .photo.one, .photo.four { height: 440px; }
+            .photo.two, .photo.three { height: 320px; }
+            .final-grid { gap: 10px; }
+            .final-grid img, .final-grid img:nth-child(2) { height: 360px; }
+            .final-grid img:nth-child(2) { height: 730px; }
+            .letter { padding: 55px 35px; }
         }
 
-        .folder-back { background: #8c5960; border-color: rgba(217, 179, 108, .35); }
-        .folder-front { background: linear-gradient(145deg, #a76871, #78414b); }
-
-        @media (max-width: 767px) {
-            .hero-layout { padding-top: 6rem; padding-bottom: 4rem; }
-            .hero-copy { text-align: center; }
+        @media (prefers-reduced-motion: reduce) {
+            *, *::before, *::after { scroll-behavior: auto !important; animation: none !important; transition: none !important; }
         }
     </style>
 </head>
-
-<body class="antialiased overflow-x-hidden">
-
-    <!-- background music element -->
-    <audio id="bgMusic" loop>
-        <source src="audio/backsound.mp3" type="audio/mp3">
-    </audio>
-
-    <!-- Canvas for fireworks and hearts effects -->
-    <canvas id="canvasEfek" class="fixed inset-0 pointer-events-none z-[998]"></canvas>
-
-    <!-- 0. Lock Screen Landing (Gatekeeper) -->
-    <div id="lockScreen"
-        class="fixed inset-0 z-[999] flex flex-col items-center justify-center bg-gradient-to-b from-[#1b080d] via-[#481823] to-[#16070b] px-4 text-center">
-        <div class="absolute inset-0 bg-cover bg-center opacity-10 pointer-events-none"
-            style="background-image: url('images/foto1.jpg');"></div>
-        <span class="petal top-[14%] left-[12%] text-4xl">❀</span>
-        <span class="petal top-[28%] right-[14%] text-2xl">✿</span>
-        <span class="petal bottom-[16%] left-[20%] text-3xl">❀</span>
-        <div
-            class="z-10 mom-glass p-8 md:p-12 rounded-[2rem] max-w-md w-full transition-all duration-500">
-            <p class="gold-kicker mb-5">A little gift from your child</p>
-            <div class="text-6xl mb-4 animate-pulse">💐</div>
-            <h1 class="text-3xl md:text-4xl font-cursive text-pink-300 mb-2">A Special Place for Mom ✨</h1>
-            <p class="text-gray-300 text-sm md:text-base mb-8">Kejutan kecil ini dibuat khusus untuk Mama.<br>Masukkan PIN
-                untuk membuka hadiah istimewa ini.</p>
-
-            <input type="password" id="landingPinInput" maxlength="6" placeholder="••••••"
-                class="w-48 text-center text-4xl tracking-widest bg-black/50 border-2 border-pink-500/20 text-white rounded-xl py-3 mb-8 focus:outline-none focus:border-pink-500 transition-colors">
-
-            <button onclick="unlockLanding()"
-                class="w-full py-4 bg-gradient-to-r from-pink-500 to-rose-500 hover:from-pink-600 hover:to-rose-600 rounded-full font-bold shadow-lg shadow-pink-500/30 transition-all duration-300 transform active:scale-95 cursor-pointer text-lg tracking-wider">
-                BUKA SEKARANG 🔑
-            </button>
-            <p id="landingPinError" class="text-rose-400 text-sm mt-4 hidden">PIN-nya belum tepat, Ma 😢<br><span class="text-xs text-pink-300 font-semibold italic">Clue: Hari istimewa Mama dan tahun lahir Mama 🤫🎂🎈</span></p>
+<body>
+    <div class="lock" id="lockScreen">
+        <div class="lock-card">
+            <div class="lock-flower">💐</div>
+            <p class="eyebrow">Sebuah hadiah kecil untuk Mama</p>
+            <h1>Buka dengan hati</h1>
+            <p>Ada kenangan, terima kasih, dan satu permintaan maaf yang ingin aku sampaikan.</p>
+            <input class="pin" id="pinInput" type="password" maxlength="6" inputmode="numeric" placeholder="••••••" aria-label="Masukkan PIN">
+            <button class="open-button" id="openButton">Buka hadiah ini</button>
+            <p class="pin-error" id="pinError">PIN belum tepat, Ma. Coba tanggal istimewa Mama.</p>
         </div>
     </div>
 
-    <!-- Main Content Container (Locked initially) -->
-    <div id="mainContent" class="hidden opacity-0 transition-opacity duration-1000">
-
-        <!-- 1. Hero Section -->
-        <section class="min-h-screen flex items-center justify-center relative px-5 overflow-hidden">
-            <div class="absolute inset-0 z-0 bg-cover bg-center opacity-25"
-                style="background-image: url('images/foto1.jpg');"></div>
-            <div class="absolute inset-0 bg-gradient-to-r from-[#17080d]/95 via-[#3a1019]/80 to-[#17080d]/70 z-0"></div>
-            <span class="petal top-[12%] left-[8%] text-4xl z-10">❀</span>
-            <span class="petal bottom-[18%] right-[7%] text-3xl z-10">✿</span>
-            <span class="petal top-[20%] right-[32%] text-xl z-10">❀</span>
-            <div class="hero-layout z-10 w-full max-w-6xl grid md:grid-cols-2 items-center gap-12 md:gap-20 py-16">
-                <div class="hero-copy order-2 md:order-1">
-                    <p class="gold-kicker mb-5">05 · 07 · 1985 — A beautiful soul was born</p>
-                    <h1 class="hero-title text-6xl sm:text-7xl lg:text-8xl font-cursive leading-[.9] mb-5">Happy Birthday,<br>Mama</h1>
-                    <p class="text-lg md:text-xl font-serif-elegant italic text-[#f2d7d9] leading-relaxed max-w-lg">
-                        “Untuk perempuan pertama yang mengajariku arti cinta, rumah, dan ketulusan.”
-                    </p>
-                    <div class="mt-8 flex items-center gap-4 justify-center md:justify-start">
-                        <span class="w-14 h-px bg-[#d9b36c]"></span>
-                        <span class="text-[#d9b36c] text-xl">♥</span>
-                        <span class="w-14 h-px bg-[#d9b36c]"></span>
-                    </div>
-                </div>
-                <div class="order-1 md:order-2 flex justify-center">
-                    <div class="hero-portrait">
-                        <img src="images/foto1.jpg" alt="Foto Mama tersayang">
-                    </div>
-                </div>
+    <main id="mainContent">
+        <section class="hero">
+            <div class="hero-copy">
+                <p class="eyebrow">05 Juli 1985 · Hari lahir perempuan terhebat</p>
+                <h2>Happy Birthday,<em>Mama</em></h2>
+                <p class="hero-note">Untuk perempuan pertama yang mengajariku arti cinta, ketulusan, dan tempat untuk selalu pulang.</p>
+            </div>
+            <div class="hero-photo">
+                <img src="images/foto1.jpg" alt="Mama tersayang">
+                <span class="hero-date">WITH ALL MY LOVE · 2026</span>
             </div>
         </section>
 
-        <!-- 2. Message Section -->
-        <section class="min-h-screen flex items-center justify-center px-6 py-20">
-            <div
-                class="max-w-2xl mom-glass p-8 md:p-12 rounded-[2rem] text-center transition-all duration-500 hover:border-pink-200/40">
-                <p class="gold-kicker mb-5">From my heart to yours</p>
-                <h2 class="text-3xl md:text-4xl font-serif-elegant text-pink-300 font-bold mb-6">Untuk Mama Tersayang...</h2>
-                <p class="text-gray-300 leading-relaxed italic text-xl">
-                    "Terima kasih telah menjadi rumah pertamaku, pelukan paling hangat, dan orang yang selalu menyayangiku tanpa syarat. Aku bersyukur terlahir sebagai anak Mama."
-                </p>
-                <div class="flex justify-center gap-1 mt-6 text-pink-400">
-                    <span class="animate-pulse">💖</span>
-                    <span class="animate-pulse delay-75">✨</span>
-                    <span class="animate-pulse delay-150">💖</span>
-                </div>
+        <section class="intro reveal">
+            <p class="eyebrow">Sebelum semuanya dimulai</p>
+            <blockquote>Kalau aku diminta menyebut satu kata untuk menggambarkan Mama, aku akan memilih <span>“rumah”</span>—tempat yang selalu menerimaku, bahkan saat aku belum menjadi versi terbaik diriku.</blockquote>
+            <div class="small-heart">♥</div>
+        </section>
+
+        <section class="story">
+            <div class="story-heading reveal">
+                <h3>Wajah-wajah bahagia yang ingin selalu kuingat.</h3>
+                <p>Bukan hanya fotonya yang kusimpan. Aku menyimpan hangatnya, tawanya, dan perasaan beruntung karena memiliki Mama.</p>
+            </div>
+            <div class="gallery">
+                <figure class="photo one reveal">
+                    <img src="images/foto2.jpg" alt="Kenangan bersama Mama">
+                    <figcaption>Bahagia Mama adalah doa yang selalu ingin kulihat menjadi nyata.</figcaption>
+                </figure>
+                <figure class="photo two reveal">
+                    <img src="images/foto3.jpg" alt="Senyum Mama">
+                    <figcaption>Senyum yang selalu membuat semuanya terasa baik-baik saja.</figcaption>
+                </figure>
+                <figure class="photo three reveal">
+                    <img src="images/foto4.jpg" alt="Momen istimewa Mama">
+                    <figcaption>Setiap waktu bersama Mama selalu pantas dikenang.</figcaption>
+                </figure>
+                <figure class="photo four reveal">
+                    <img src="images/foto5.jpg" alt="Foto hangat Mama">
+                    <figcaption>Semoga hari-hari Mama selalu selembut cinta yang Mama berikan.</figcaption>
+                </figure>
             </div>
         </section>
 
-        <!-- 3. Polaroid Grid Section -->
-        <section class="min-h-screen py-24 px-4">
-            <h3 class="text-center text-5xl md:text-7xl font-cursive text-pink-300 mb-24 drop-shadow-lg">Our Precious
-                Memories ✨</h3>
-
-            <!-- Polaroid Grid Container (rendered dynamically via JS) -->
-            <div id="polaroidGrid"
-                class="max-w-6xl mx-auto grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-x-12 gap-y-20"></div>
-        </section>
-
-        <!-- Polaroid Memory Modal -->
-        <div id="modalMemory" class="modal-overlay fixed inset-0 z-[100] items-center justify-center p-4">
-            <div
-                class="bg-gradient-to-br from-[#2d0107] to-[#120002] border border-pink-500/30 max-w-lg w-full p-5 sm:p-8 rounded-2xl shadow-2xl relative text-center max-h-[90vh] overflow-y-auto">
-                <button onclick="tutupMemoryModal()"
-                    class="absolute top-4 right-4 text-gray-400 hover:text-white text-3xl cursor-pointer transition-colors">&times;</button>
-
-                <img id="modalMemoryImg" src="" alt="Detail Memory"
-                    class="w-full h-48 sm:h-64 md:h-80 object-cover rounded-xl border-4 border-white shadow-lg mb-6">
-
-                <h3 id="modalMemoryTitle" class="text-2xl sm:text-4xl font-cursive text-pink-300 mb-3 sm:mb-4"></h3>
-                <p id="modalMemoryDesc"
-                    class="text-gray-200 leading-relaxed font-serif-elegant italic text-base sm:text-lg whitespace-pre-line"></p>
-
-                <button onclick="tutupMemoryModal()"
-                    class="mt-6 sm:mt-8 px-6 py-2 bg-gradient-to-r from-pink-500 to-rose-500 hover:from-pink-600 hover:to-rose-600 text-white rounded-full text-sm font-bold tracking-wider cursor-pointer transition-all active:scale-95">
-                    Tutup Cerita 💖
-                </button>
+        <section class="gratitude">
+            <div class="gratitude-image reveal">
+                <img src="images/foto6.jpg" alt="Mama, perempuan hebat">
             </div>
-        </div>
-
-        <!-- 3.5. Childhood Memories Section (Folder Pop-out Style) -->
-        <section class="min-h-screen py-24 px-4 bg-black/10 relative flex flex-col justify-center overflow-hidden">
-            <div class="absolute top-10 left-10 text-3xl opacity-30 animate-pulse">🧸</div>
-            <div class="absolute bottom-10 right-10 text-3xl opacity-30 animate-pulse">🍼</div>
-
-            <h3 class="text-center text-5xl md:text-7xl font-cursive text-pink-300 mb-6 drop-shadow-lg">Where It All Began... 👶</h3>
-            <p class="text-center text-gray-400 text-base max-w-md mx-auto mb-16 italic font-serif-elegant">"Perjalanan Mama dari masa kecil hingga menjadi perempuan hebat yang membesarkan dan menjaga keluarga dengan penuh cinta."</p>
-            
-            <div class="flex flex-col items-center justify-center min-h-[420px] mt-10 relative">
-                <!-- Interactive Folder Wrapper -->
-                <div id="childhoodFolder" class="folder-wrapper cursor-pointer group z-10">
-                    
-                    <!-- Polaroid Inside: Photo 1 -->
-                    <div class="photo-card photo-1 polaroid max-w-[170px] bg-white p-2 pb-4 shadow-2xl">
-                        <img src="images/kecil1.jpg" alt="Masa Kecil 1" class="w-full h-32 object-cover rounded-sm grayscale hover:grayscale-0 transition-all duration-500">
-                        <p class="mt-2.5 text-[9px] font-mono tracking-widest text-gray-500 uppercase font-bold">Little Mom 👧</p>
-                    </div>
-
-                    <!-- Polaroid Inside: Photo 2 -->
-                    <div class="photo-card photo-2 polaroid max-w-[170px] bg-white p-2 pb-4 shadow-2xl">
-                        <img src="images/kecil2.jpg" alt="Masa Kecil 2" class="w-full h-32 object-cover rounded-sm grayscale hover:grayscale-0 transition-all duration-500">
-                        <p class="mt-2.5 text-[9px] font-mono tracking-widest text-gray-500 uppercase font-bold">Teenager ✨</p>
-                    </div>
-
-                    <!-- Polaroid Inside: Photo 3 -->
-                    <div class="photo-card photo-3 polaroid max-w-[170px] bg-white p-2 pb-4 shadow-2xl">
-                        <img src="images/kecil3.jpg" alt="Masa Kecil 3" class="w-full h-32 object-cover rounded-sm grayscale hover:grayscale-0 transition-all duration-500">
-                        <p class="mt-2.5 text-[9px] font-mono tracking-widest text-gray-500 uppercase font-bold">Growing Up 👨</p>
-                    </div>
-
-                    <!-- Polaroid Inside: Photo 4 -->
-                    <div class="photo-card photo-4 polaroid max-w-[170px] bg-white p-2 pb-4 shadow-2xl">
-                        <img src="images/kecil4.jpg" alt="Masa Kecil 4" class="w-full h-32 object-cover rounded-sm grayscale hover:grayscale-0 transition-all duration-500">
-                        <p class="mt-2.5 text-[9px] font-mono tracking-widest text-gray-500 uppercase font-bold">Her Style ✨</p>
-                    </div>
-
-                    <!-- Polaroid Inside: Photo 5 -->
-                    <div class="photo-card photo-5 polaroid max-w-[170px] bg-white p-2 pb-4 shadow-2xl">
-                        <img src="images/kecil5.jpg" alt="Masa Kecil 5" class="w-full h-32 object-cover rounded-sm grayscale hover:grayscale-0 transition-all duration-500">
-                        <p class="mt-2.5 text-[9px] font-mono tracking-widest text-gray-500 uppercase font-bold">Now 💖</p>
-                    </div>
-
-                    <!-- Folder Back -->
-                    <div class="absolute inset-0 folder-back z-0 flex items-end justify-center pb-5">
-                        <span class="text-pink-300/30 text-sm font-bold tracking-widest font-mono">MOM'S JOURNEY</span>
-                    </div>
-
-                    <!-- Folder Front Flap -->
-                    <div class="absolute inset-0 folder-front z-20 flex flex-col items-center justify-center p-6 border-t border-white/5">
-                        <div class="text-6xl mb-3 transition-transform duration-500 group-hover:scale-110">📂</div>
-                        <span class="text-white font-bold tracking-widest text-xs uppercase bg-black/40 px-4 py-1.5 rounded-full shadow-md">Ketuk untuk Membuka 🔑</span>
-                    </div>
-                </div>
-                
-                <p id="folderHint" class="text-pink-300 text-sm mt-12 animate-pulse text-center font-semibold">👇 Ketuk folder di atas untuk membuka foto masa kecil Mama 👇</p>
+            <div class="gratitude-copy reveal">
+                <p class="eyebrow">Terima kasih, Ma</p>
+                <h3>Untuk semua yang sering tidak sempat kuucapkan.</h3>
+                <p>Terima kasih untuk doa-doa yang Mama panjatkan diam-diam, untuk lelah yang Mama sembunyikan, dan untuk kasih sayang yang tidak pernah meminta balasan.</p>
+                <p>Aku mungkin tidak selalu pandai menunjukkannya, tetapi setiap langkahku membawa bagian dari perjuangan dan ajaran Mama.</p>
+                <p>Kalau hari ini aku masih bisa berdiri dan terus mencoba, itu karena sejak kecil Mama tidak pernah berhenti percaya kepadaku.</p>
             </div>
         </section>
 
-        <!-- 4. Interactive Pop-up Letter (Paper Style) -->
-        <section class="py-20 flex flex-col items-center justify-center bg-black/10">
-            <button onclick="bukaSurat()"
-                class="group relative px-8 py-4 bg-pink-600 rounded-full font-bold text-white shadow-xl hover:bg-pink-700 transition-all duration-300 transform active:scale-95 animate-pulse cursor-pointer">
-                Buka Surat dari Anakmu ✉️
-                <div
-                    class="absolute -top-2 -right-2 bg-white text-pink-600 rounded-full w-6 h-6 flex items-center justify-center text-xs shadow-md font-bold">
-                    1</div>
-            </button>
+        <section class="apology">
+            <article class="letter reveal">
+                <p class="eyebrow" style="text-align:center">Dari hati anakmu</p>
+                <h3>Tanda Maaf Aku</h3>
+                <p>Ma, aku minta maaf untuk setiap perkataan dan sikapku yang pernah membuat hati Mama sedih. Maaf untuk saat-saat ketika aku membantah, tidak mendengarkan, atau terlalu sibuk dengan duniaku sendiri sampai lupa bahwa Mama juga ingin didengar.</p>
+                <p>Maaf karena aku belum selalu menjadi anak yang membanggakan. Kadang aku baru memahami besarnya pengorbanan Mama setelah aku bertumbuh, dan baru menyadari bahwa banyak hal yang terlihat sederhana ternyata Mama perjuangkan dengan air mata dan doa.</p>
+                <p>Aku tahu satu ucapan maaf tidak dapat menghapus semua rasa kecewa. Karena itu, biarkan maaf ini menjadi awal dari usahaku untuk lebih dewasa, lebih lembut dalam berbicara, dan lebih sungguh-sungguh membahagiakan Mama.</p>
+                <p>Terima kasih karena tetap menyayangiku, bahkan dalam bagian diriku yang masih berantakan. Aku sayang Mama—lebih dalam daripada yang selama ini berhasil kuucapkan.</p>
+                <p class="signature">Dengan cinta dan maaf yang tulus,<br>Anakmu ♥</p>
+            </article>
         </section>
 
-        <div id="modalSurat" class="modal-overlay fixed inset-0 z-[100] items-center justify-center p-4">
-            <div
-                class="letter-paper max-w-2xl w-full p-5 sm:p-8 md:p-12 rounded-sm relative overflow-y-auto max-h-[90vh] transform rotate-0 sm:rotate-1">
-
-                <div class="absolute top-6 right-6 w-24 h-24 border-4 border-white shadow-lg rotate-12 hidden md:block">
-                    <img src="images/foto-surat.jpg" class="w-full h-full object-cover">
-                </div>
-
-                <h2 class="text-xl sm:text-2xl font-bold mb-4 sm:mb-6 border-b-2 border-pink-200 pb-2 font-serif-elegant">Untuk Mama Tersayang,</h2>
-
-                <div class="space-y-3 sm:space-y-4 text-base sm:text-lg italic font-serif-elegant">
-                    <p>Selamat ulang tahun, Ma. Kata-kata mungkin tidak akan pernah cukup untuk menggambarkan betapa berharganya Mama dalam hidupku.</p>
-                    <p>Terima kasih untuk setiap doa, perhatian, pengorbanan, dan kesabaran Mama yang sering kali baru kusadari setelah aku bertumbuh.</p>
-                    <p class="font-bold text-pink-700">Tanda Maaf Aku</p>
-                    <p>Ma, aku minta maaf untuk semua perkataan dan sikapku yang pernah membuat Mama sedih, kecewa, atau merasa tidak dihargai. Maaf jika selama ini aku masih sering membantah, kurang peka, dan belum mampu menjadi anak seperti yang Mama harapkan.</p>
-                    <p>Aku tahu ucapan maaf saja tidak bisa menghapus semuanya. Karena itu, aku ingin menjadikan maaf ini sebagai janji untuk belajar lebih dewasa, lebih mendengarkan Mama, dan lebih sungguh-sungguh menunjukkan rasa sayangku.</p>
-                    <p>Semoga Mama selalu sehat, panjang umur, bahagia, dan dikelilingi cinta. Aku sayang Mama, hari ini dan selamanya.</p>
-                </div>
-
-                <div class="mt-10 text-right">
-                    <p class="font-bold font-serif-elegant">Dengan cinta dan maaf yang tulus,</p>
-                    <p class="mt-2 text-3xl font-cursive text-pink-700">Anakmu ❤️</p>
-                </div>
-
-                <button onclick="tutupSurat()"
-                    class="mt-8 px-5 py-2 bg-gray-200 hover:bg-gray-300 text-gray-800 rounded text-sm font-sans uppercase tracking-widest cursor-pointer transition-colors duration-200">
-                    Tutup Surat
-                </button>
-            </div>
-        </div>
-
-        <!-- 5. Film Roll Clip -->
-        <section class="min-h-screen py-20 px-4 flex flex-col items-center justify-center">
-            <h3 class="text-center text-3xl font-serif-elegant font-bold text-pink-300 mb-12">Cuplikan Kenangan Kita 🎬</h3>
-
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-8 w-full max-w-5xl">
-                <!-- Video 1 -->
-                <div class="relative bg-black p-4 rounded-lg shadow-2xl border border-zinc-800">
-                    <!-- Film strip perforations top -->
-                    <div class="flex justify-between mb-4 px-2">
-                        <div class="w-5 h-5 bg-zinc-900 rounded-sm border border-zinc-800"></div>
-                        <div class="w-5 h-5 bg-zinc-900 rounded-sm border border-zinc-800"></div>
-                        <div class="w-5 h-5 bg-zinc-900 rounded-sm border border-zinc-800"></div>
-                        <div class="w-5 h-5 bg-zinc-900 rounded-sm border border-zinc-800"></div>
-                        <div class="w-5 h-5 bg-zinc-900 rounded-sm border border-zinc-800"></div>
-                        <div class="w-5 h-5 bg-zinc-900 rounded-sm border border-zinc-800"></div>
-                    </div>
-                    <!-- Video container -->
-                    <div class="aspect-video w-full overflow-hidden bg-zinc-950 rounded border border-zinc-900">
-                        <video src="video/kenangan1.mp4" loop muted autoplay playsinline class="w-full h-full object-cover"></video>
-                    </div>
-                    <!-- Film strip perforations bottom -->
-                    <div class="flex justify-between mt-4 px-2">
-                        <div class="w-5 h-5 bg-zinc-900 rounded-sm border border-zinc-800"></div>
-                        <div class="w-5 h-5 bg-zinc-900 rounded-sm border border-zinc-800"></div>
-                        <div class="w-5 h-5 bg-zinc-900 rounded-sm border border-zinc-800"></div>
-                        <div class="w-5 h-5 bg-zinc-900 rounded-sm border border-zinc-800"></div>
-                        <div class="w-5 h-5 bg-zinc-900 rounded-sm border border-zinc-800"></div>
-                        <div class="w-5 h-5 bg-zinc-900 rounded-sm border border-zinc-800"></div>
-                    </div>
-                </div>
-
-                <!-- Video 2 -->
-                <div class="relative bg-black p-4 rounded-lg shadow-2xl border border-zinc-800">
-                    <!-- Film strip perforations top -->
-                    <div class="flex justify-between mb-4 px-2">
-                        <div class="w-5 h-5 bg-zinc-900 rounded-sm border border-zinc-800"></div>
-                        <div class="w-5 h-5 bg-zinc-900 rounded-sm border border-zinc-800"></div>
-                        <div class="w-5 h-5 bg-zinc-900 rounded-sm border border-zinc-800"></div>
-                        <div class="w-5 h-5 bg-zinc-900 rounded-sm border border-zinc-800"></div>
-                        <div class="w-5 h-5 bg-zinc-900 rounded-sm border border-zinc-800"></div>
-                        <div class="w-5 h-5 bg-zinc-900 rounded-sm border border-zinc-800"></div>
-                    </div>
-                    <!-- Video container -->
-                    <div class="aspect-video w-full overflow-hidden bg-zinc-950 rounded border border-zinc-900">
-                        <video src="video/kenangan2.mp4" loop muted autoplay playsinline class="w-full h-full object-cover"></video>
-                    </div>
-                    <!-- Film strip perforations bottom -->
-                    <div class="flex justify-between mt-4 px-2">
-                        <div class="w-5 h-5 bg-zinc-900 rounded-sm border border-zinc-800"></div>
-                        <div class="w-5 h-5 bg-zinc-900 rounded-sm border border-zinc-800"></div>
-                        <div class="w-5 h-5 bg-zinc-900 rounded-sm border border-zinc-800"></div>
-                        <div class="w-5 h-5 bg-zinc-900 rounded-sm border border-zinc-800"></div>
-                        <div class="w-5 h-5 bg-zinc-900 rounded-sm border border-zinc-800"></div>
-                        <div class="w-5 h-5 bg-zinc-900 rounded-sm border border-zinc-800"></div>
-                    </div>
-                </div>
+        <section class="final-gallery">
+            <div class="final-grid reveal">
+                <img src="images/kecil1.jpg" alt="Perjalanan Mama">
+                <img src="images/kecil2.jpg" alt="Kenangan Mama">
+                <img src="images/kecil3.jpg" alt="Masa berharga Mama">
             </div>
         </section>
 
-        <!-- 6. Interactive Letter Section -->
-        <section class="min-h-screen py-20 px-4 flex flex-col items-center justify-center">
-            <div id="letterWrapper"
-                class="relative w-full max-w-lg mx-auto cursor-pointer group bg-gradient-to-br from-[#4a0812] to-[#250106] border border-pink-900/40 p-8 rounded-2xl shadow-2xl transition-all duration-500 hover:scale-[1.02] hover:border-pink-500/30">
-                <div id="envelopeClosed" class="text-center py-12 transition-all duration-300">
-                    <div class="text-6xl mb-6 animate-bounce">✉️</div>
-                    <h4 class="text-2xl font-serif-elegant font-semibold text-pink-300">Ada sebuah surat untukmu...</h4>
-                    <p class="text-gray-400 text-sm mt-3">Klik untuk membaca tanda maaf dan sayangku 💖</p>
-                </div>
-
-                <div id="envelopeOpen" class="hidden opacity-0 transition-all duration-700">
-                    <h4
-                        class="text-2xl font-cursive text-pink-300 mb-4 border-b border-pink-950 pb-2 text-center text-3xl">
-                        Dear, My Mom</h4>
-                    <p class="text-gray-200 leading-relaxed font-serif-elegant text-lg whitespace-pre-line italic">
-                        Mama,
-                        Terima kasih karena selalu ada, bahkan ketika aku sulit dimengerti. Kasih sayang dan doa Mama adalah kekuatan yang selalu menemaniku.
-
-                        Maaf untuk setiap kesalahan, ucapan, dan sikapku yang pernah melukai hati Mama. Aku mungkin belum menjadi anak terbaik, tetapi aku akan terus belajar membahagiakan dan membanggakan Mama.
-
-                        Semoga di usia yang baru ini Mama selalu diberikan kesehatan, umur panjang, ketenangan, dan kebahagiaan. Selamat ulang tahun, Mama tersayang! 💖
-                    </p>
-                    <div class="text-right text-pink-400 mt-8 font-cursive text-3xl">Anakmu yang Menyayangimu</div>
-                </div>
+        <section class="wish">
+            <p class="eyebrow" style="color:#f0d5ad">Doaku di hari ulang tahun Mama</p>
+            <h3 class="reveal">Semoga hidup selalu memeluk Mama sehangat Mama memeluk kami.</h3>
+            <p class="reveal">Semoga Mama selalu sehat, panjang umur, tenang hatinya, dimudahkan setiap langkahnya, dan diberi lebih banyak alasan untuk tersenyum. Selamat ulang tahun, Ma. Terima kasih sudah menjadi rumah terbaik dalam hidupku.</p>
+            <div class="music reveal">
+                <iframe id="musicPlayer" src="https://www.youtube.com/embed/cFSO8w_kTtw?enablejsapi=1&autoplay=0&mute=0" title="Lagu untuk Mama" allow="autoplay; encrypted-media; picture-in-picture" allowfullscreen></iframe>
             </div>
         </section>
+    </main>
 
-        <!-- 7. Vinyl Music Player -->
-        <section class="min-h-screen flex flex-col items-center justify-center py-20 px-4 bg-black/20">
-            <h3 class="text-2xl italic text-pink-200 mb-12 text-center font-serif-elegant">"This song is for
-                you, Mom..." 🎶</h3>
+    <footer>DIBUAT DENGAN CINTA · KHUSUS UNTUK MAMA</footer>
 
-            <div class="flex flex-col lg:flex-row items-center justify-center gap-16 max-w-5xl w-full">
-                <!-- Vinyl Cassette -->
-                <div
-                    class="relative w-56 h-56 md:w-64 md:h-64 bg-black rounded-full border-4 border-zinc-800 shadow-2xl flex items-center justify-center vinyl-animation ring-8 ring-black/30">
-                    <div class="absolute inset-3 rounded-full border border-dashed border-zinc-700 opacity-50"></div>
-                    <img src="images/foto-center.jpg" alt="Vinyl center image"
-                        class="w-24 h-24 md:w-28 md:h-28 rounded-full object-cover border-4 border-white shadow-md">
-                    <div class="absolute w-4 h-4 bg-white rounded-full border border-gray-400"></div>
-                </div>
-
-                <!-- YouTube Video Embed -->
-                <div
-                    class="w-full md:w-[480px] aspect-video rounded-2xl overflow-hidden shadow-2xl border border-pink-500/20">
-                    <iframe id="musicPlayer" class="w-full h-full" src="https://www.youtube.com/embed/cFSO8w_kTtw?enablejsapi=1&autoplay=0&mute=0"
-                        title="YouTube video player" frameborder="0"
-                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                        allowfullscreen></iframe>
-                </div>
-            </div>
-        </section>
-
-        <!-- Footer -->
-        <footer class="py-8 text-center text-xs text-gray-500 border-t border-white/5 bg-black/30">
-            <p>Made with ❤️ for My Mom</p>
-        </footer>
-
-    </div>
-
-    <!-- Script Block -->
     <script>
-        // Custom PIN Configuration
         const CORRECT_PIN = "050785";
+        const lockScreen = document.getElementById("lockScreen");
+        const mainContent = document.getElementById("mainContent");
+        const pinInput = document.getElementById("pinInput");
+        const pinError = document.getElementById("pinError");
 
-        // Memories Data (User can easily customize images, titles and deep text here!)
-        const memoriesData = [
-            {
-                img: "images/foto1.jpg",
-                title: "Tawa Mama 💖",
-                desc: "Saat-saat ketika kita tertawa bersama selalu menjadi kenangan yang berharga. Senyum Mama adalah kehangatan yang membuat rumah terasa hidup..."
-            },
-            {
-                img: "images/foto2.jpg",
-                title: "Hari Spesial ✨",
-                desc: "Hari istimewa ketika kenangan manis keluarga terabadikan. Kehadiran Mama selalu membuat setiap momen sederhana terasa begitu berarti..."
-            },
-            {
-                img: "images/foto3.jpg",
-                title: "Langkah Pertamaku 👣",
-                desc: "Sejak langkah pertamaku, tangan Mama selalu menuntun dan menjagaku. Terima kasih karena tidak pernah lelah mengajariku untuk bangkit dan terus berjalan..."
-            },
-            {
-                img: "images/foto4.jpg",
-                title: "Senyuman Hangat 😊",
-                desc: "Senyuman Mama selalu menenangkan saat aku gelisah. Mama adalah rumah dan tempat pulang ternyaman dalam setiap keadaan..."
-            },
-            {
-                img: "images/foto5.jpg",
-                title: "Pelukan Mama 🤗",
-                desc: "Pelukan Mama adalah tempat paling aman. Terima kasih telah menjadi pelindung, pendengar, dan tempatku bercerita meski Mama sendiri sering menyimpan lelah..."
-            },
-            {
-                img: "images/foto6.jpg",
-                title: "Doa untuk Mama ✨",
-                desc: "Semoga setiap tahun yang berlalu membawa lebih banyak kesehatan, ketenangan, dan kebahagiaan untuk Mama. Selamat ulang tahun untuk perempuan terhebat dalam hidupku..."
+        function openGift() {
+            if (pinInput.value !== CORRECT_PIN) {
+                pinError.style.display = "block";
+                pinInput.value = "";
+                pinInput.focus();
+                return;
             }
-        ];
 
-        // Render Polaroid Cards Dynamically
-        const polaroidGrid = document.getElementById('polaroidGrid');
-        memoriesData.forEach((memory, index) => {
-            const rotations = ['rotate-3', '-rotate-3', 'rotate-4', '-rotate-4', 'rotate-2', '-rotate-3'];
-            const translates = ['sm:translate-y-4', 'sm:-translate-y-6', 'sm:translate-y-8', 'sm:-translate-y-4', 'sm:translate-y-6', 'sm:-translate-y-8'];
+            lockScreen.classList.add("open");
+            mainContent.classList.add("visible");
+            launchPetals();
 
-            const card = document.createElement('div');
-            card.className = `polaroid transform ${rotations[index % 6]} ${translates[index % 6]} max-w-[280px] mx-auto rounded-sm cursor-pointer`;
-            card.innerHTML = `
-                <img src="${memory.img}" alt="${memory.title}" class="w-full h-56 md:h-64 object-cover rounded-sm">
-                <p class="mt-4 text-2xl md:text-3xl font-cursive text-[#4a0812] font-semibold tracking-wide">${memory.title}</p>
-            `;
-            card.addEventListener('click', () => bukaMemoryModal(index));
-            polaroidGrid.appendChild(card);
+            const player = document.getElementById("musicPlayer");
+            player.contentWindow.postMessage('{"event":"command","func":"playVideo","args":""}', "*");
+        }
+
+        document.getElementById("openButton").addEventListener("click", openGift);
+        pinInput.addEventListener("keydown", event => {
+            if (event.key === "Enter") openGift();
         });
 
-        // Memory Modal Functions
-        function bukaMemoryModal(index) {
-            const modal = document.getElementById('modalMemory');
-            const data = memoriesData[index];
-
-            document.getElementById('modalMemoryImg').src = data.img;
-            document.getElementById('modalMemoryTitle').textContent = data.title;
-            document.getElementById('modalMemoryDesc').textContent = data.desc;
-
-            modal.classList.add('modal-active');
-            modal.style.display = 'flex';
-        }
-
-        function tutupMemoryModal() {
-            const modal = document.getElementById('modalMemory');
-            modal.classList.remove('modal-active');
-            modal.style.display = 'none';
-        }
-
-        // Canvas Fireworks and Hearts System
-        const canvas = document.getElementById('canvasEfek');
-        const ctx = canvas.getContext('2d');
-        let particles = [];
-        let animId = null;
-
-        function resizeCanvas() {
-            canvas.width = window.innerWidth;
-            canvas.height = window.innerHeight;
-        }
-        window.addEventListener('resize', resizeCanvas);
-        resizeCanvas();
-
-        class Particle {
-            constructor(x, y, type) {
-                this.x = x;
-                this.y = y;
-                this.type = type;
-                this.size = type === 'heart' ? Math.random() * 15 + 12 : Math.random() * 4 + 1.5;
-                this.speedX = Math.random() * 6 - 3;
-                this.speedY = type === 'heart' ? Math.random() * -3 - 2 : Math.random() * -8 - 2;
-                this.alpha = 1;
-                this.color = type === 'heart' ? `hsla(${Math.random() * 30 + 340}, 100%, 75%, ` : `hsla(${Math.random() * 360}, 100%, 65%, `;
-                this.gravity = type === 'heart' ? 0.03 : 0.08;
-            }
-
-            update() {
-                this.x += this.speedX;
-                this.speedY += this.gravity;
-                this.y += this.speedY;
-                this.alpha -= 0.012;
-            }
-
-            draw() {
-                ctx.save();
-                ctx.globalAlpha = this.alpha;
-
-                if (this.type === 'heart') {
-                    ctx.beginPath();
-                    ctx.moveTo(this.x, this.y);
-                    ctx.bezierCurveTo(this.x - this.size / 2, this.y - this.size / 2, this.x - this.size, this.y + this.size / 3, this.x, this.y + this.size);
-                    ctx.bezierCurveTo(this.x + this.size, this.y + this.size / 3, this.x + this.size / 2, this.y - this.size / 2, this.x, this.y);
-                    ctx.fillStyle = this.color + this.alpha + ')';
-                    ctx.fill();
-                } else {
-                    ctx.beginPath();
-                    ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
-                    ctx.fillStyle = this.color + this.alpha + ')';
-                    ctx.fill();
-                }
-                ctx.restore();
-            }
-        }
-
-        function ledakanKembangApiLove() {
-            const x = Math.random() * (canvas.width * 0.6) + (canvas.width * 0.2);
-            const y = Math.random() * (canvas.height * 0.4) + (canvas.height * 0.2);
-            for (let i = 0; i < 40; i++) { particles.push(new Particle(x, y, 'spark')); }
-            for (let i = 0; i < 20; i++) { particles.push(new Particle(x, y, 'heart')); }
-        }
-
-        function buatHujanHatiJatuh() {
-            if (particles.filter(p => p.type === 'heart').length < 30) {
-                const p = new Particle(Math.random() * canvas.width, -20, 'heart');
-                p.speedY = Math.random() * 2 + 1;
-                p.gravity = 0;
-                particles.push(p);
-            }
-        }
-
-        function animasiLoop() {
-            ctx.clearRect(0, 0, canvas.width, canvas.height);
-            buatHujanHatiJatuh();
-
-            for (let i = particles.length - 1; i >= 0; i--) {
-                particles[i].update();
-                particles[i].draw();
-                if (particles[i].alpha <= 0) {
-                    particles.splice(i, 1);
-                }
-            }
-            animId = requestAnimationFrame(animasiLoop);
-        }
-
-        // Lock Screen Unlock Logic
-        function unlockLanding() {
-            const input = document.getElementById('landingPinInput').value;
-            const error = document.getElementById('landingPinError');
-            if (input === CORRECT_PIN) {
-                const iframe = document.getElementById('musicPlayer');
-                if (iframe) {
-                    iframe.contentWindow.postMessage('{"event":"command","func":"playVideo","args":""}', '*');
-                }
-
-                animasiLoop();
-                ledakanKembangApiLove();
-                setTimeout(ledakanKembangApiLove, 300);
-                setTimeout(ledakanKembangApiLove, 700);
-                setTimeout(ledakanKembangApiLove, 1100);
-                setTimeout(ledakanKembangApiLove, 1500);
-
-                const lockScreen = document.getElementById('lockScreen');
-                lockScreen.style.opacity = '0';
-                lockScreen.style.transition = 'opacity 0.8s ease-in-out';
-
-                const mainContent = document.getElementById('mainContent');
-                mainContent.classList.remove('hidden');
-                setTimeout(() => {
-                    mainContent.classList.remove('opacity-0');
-                    mainContent.classList.add('opacity-100');
-                    lockScreen.style.display = 'none';
-                }, 800);
-            } else {
-                error.classList.remove('hidden');
-                document.getElementById('landingPinInput').value = '';
-            }
-        }
-
-        document.getElementById('landingPinInput').addEventListener('keypress', function (e) {
-            if (e.key === 'Enter') { unlockLanding(); }
-        });
-
-        // Interactive Letter (Envelope style) Logic
-        const letterWrapper = document.getElementById('letterWrapper');
-        const envelopeClosed = document.getElementById('envelopeClosed');
-        const envelopeOpen = document.getElementById('envelopeOpen');
-
-        letterWrapper.addEventListener('click', () => {
-            if (envelopeOpen.classList.contains('hidden')) {
-                envelopeClosed.classList.add('hidden');
-                envelopeOpen.classList.remove('hidden');
-                setTimeout(() => {
-                    envelopeOpen.classList.remove('opacity-0');
-                    envelopeOpen.classList.add('opacity-100');
-                }, 50);
-            } else {
-                envelopeOpen.classList.remove('opacity-100');
-                envelopeOpen.classList.add('opacity-0');
-                setTimeout(() => {
-                    envelopeOpen.classList.add('hidden');
-                    envelopeClosed.classList.remove('hidden');
-                }, 500);
-            }
-        });
-
-        // Modal Letter Functions
-        function bukaSurat() {
-            const modal = document.getElementById('modalSurat');
-            modal.classList.add('modal-active');
-            modal.style.display = 'flex';
-        }
-
-        function tutupSurat() {
-            const modal = document.getElementById('modalSurat');
-            modal.classList.remove('modal-active');
-            modal.style.display = 'none';
-        }
-
-        // Folder Toggle Logic
-        const childhoodFolder = document.getElementById('childhoodFolder');
-        const folderHint = document.getElementById('folderHint');
-        childhoodFolder.addEventListener('click', () => {
-            childhoodFolder.classList.toggle('folder-open');
-            if (childhoodFolder.classList.contains('folder-open')) {
-                folderHint.innerHTML = "✨ Hore! Foto masa kecil Mama berhasil terbuka! ✨";
-            } else {
-                folderHint.innerHTML = "👇 Ketuk folder di atas untuk membuka foto masa kecil Mama 👇";
-            }
-        });
-
-        // Play YouTube music as soon as the user starts typing the PIN
-        const landingPinInput = document.getElementById('landingPinInput');
-        if (landingPinInput) {
-            landingPinInput.addEventListener('input', function playOnType() {
-                const iframe = document.getElementById('musicPlayer');
-                if (iframe) {
-                    iframe.contentWindow.postMessage('{"event":"command","func":"playVideo","args":""}', '*');
-                    // Remove listener once playing starts
-                    landingPinInput.removeEventListener('input', playOnType);
+        const observer = new IntersectionObserver(entries => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add("seen");
+                    observer.unobserve(entry.target);
                 }
             });
+        }, { threshold: .12 });
+
+        document.querySelectorAll(".reveal").forEach(element => observer.observe(element));
+
+        function launchPetals() {
+            for (let i = 0; i < 24; i++) {
+                setTimeout(() => {
+                    const petal = document.createElement("span");
+                    petal.className = "petal";
+                    petal.textContent = i % 3 === 0 ? "✿" : "❀";
+                    petal.style.left = `${Math.random() * 100}vw`;
+                    petal.style.fontSize = `${10 + Math.random() * 15}px`;
+                    petal.style.opacity = .25 + Math.random() * .55;
+                    petal.style.setProperty("--drift", `${-80 + Math.random() * 160}px`);
+                    petal.style.animationDuration = `${5 + Math.random() * 5}s`;
+                    document.body.appendChild(petal);
+                    setTimeout(() => petal.remove(), 10000);
+                }, i * 140);
+            }
         }
     </script>
 </body>
-
 </html>
