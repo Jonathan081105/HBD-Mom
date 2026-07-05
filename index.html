@@ -181,6 +181,138 @@
                 transform: translateX(50%) translateY(-80px) rotate(12deg) scale(0.9);
             }
         }
+
+        /* A warm, editorial birthday experience for Mom */
+        :root {
+            --wine: #3a1019;
+            --rose: #b76e79;
+            --blush: #f2d7d9;
+            --cream: #fff8ee;
+            --gold: #d9b36c;
+        }
+
+        body {
+            background:
+                radial-gradient(circle at 10% 10%, rgba(217, 179, 108, .14), transparent 28rem),
+                radial-gradient(circle at 90% 35%, rgba(183, 110, 121, .2), transparent 32rem),
+                linear-gradient(160deg, #18080d 0%, var(--wine) 42%, #16070b 100%);
+        }
+
+        body::before {
+            content: "";
+            position: fixed;
+            inset: 0;
+            pointer-events: none;
+            z-index: -1;
+            opacity: .34;
+            background-image: url("data:image/svg+xml,%3Csvg width='90' height='90' viewBox='0 0 90 90' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M45 12c7 10 16 15 27 16-8 8-11 17-9 28-10-5-20-5-30 0 2-11-1-20-9-28 11-1 20-6 21-16Z' fill='none' stroke='%23d9b36c' stroke-opacity='.12'/%3E%3C/svg%3E");
+        }
+
+        section {
+            position: relative;
+        }
+
+        section:not(:first-child)::before {
+            content: "✦";
+            display: block;
+            width: max-content;
+            margin: 0 auto 1.5rem;
+            color: var(--gold);
+            font-size: 1.25rem;
+            letter-spacing: .8rem;
+            text-shadow: 0 0 20px rgba(217, 179, 108, .65);
+        }
+
+        .mom-glass {
+            background: linear-gradient(145deg, rgba(255, 248, 238, .12), rgba(255, 255, 255, .035));
+            border: 1px solid rgba(242, 215, 217, .22);
+            box-shadow: 0 30px 80px rgba(0, 0, 0, .3), inset 0 1px rgba(255, 255, 255, .15);
+            backdrop-filter: blur(18px);
+        }
+
+        .gold-kicker {
+            color: var(--gold);
+            font-size: .72rem;
+            font-weight: 600;
+            letter-spacing: .34em;
+            text-transform: uppercase;
+        }
+
+        .hero-portrait {
+            position: relative;
+            width: min(70vw, 340px);
+            aspect-ratio: 4 / 5;
+            padding: 10px;
+            border: 1px solid rgba(217, 179, 108, .55);
+            border-radius: 48% 48% 20px 20px;
+            box-shadow: 0 35px 80px rgba(0, 0, 0, .55), 0 0 60px rgba(183, 110, 121, .22);
+        }
+
+        .hero-portrait::before,
+        .hero-portrait::after {
+            content: "❀";
+            position: absolute;
+            color: var(--gold);
+            font-size: 2.4rem;
+            text-shadow: 0 5px 20px rgba(0, 0, 0, .45);
+            z-index: 2;
+        }
+
+        .hero-portrait::before { top: 8%; left: -24px; transform: rotate(-18deg); }
+        .hero-portrait::after { right: -22px; bottom: 12%; transform: rotate(20deg); }
+
+        .hero-portrait img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            border-radius: 48% 48% 14px 14px;
+            filter: saturate(.9) contrast(1.03);
+        }
+
+        .hero-title {
+            background: linear-gradient(120deg, #fff8ee, #f0cfa0 48%, #f2d7d9);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            text-shadow: 0 12px 35px rgba(0, 0, 0, .2);
+        }
+
+        .petal {
+            position: absolute;
+            color: rgba(242, 215, 217, .55);
+            animation: float-petal 7s ease-in-out infinite;
+            pointer-events: none;
+        }
+
+        .petal:nth-child(2) { animation-delay: -2s; }
+        .petal:nth-child(3) { animation-delay: -4s; }
+
+        @keyframes float-petal {
+            0%, 100% { transform: translateY(0) rotate(-12deg); opacity: .25; }
+            50% { transform: translateY(-28px) rotate(12deg); opacity: .8; }
+        }
+
+        .polaroid {
+            background: var(--cream);
+            border: 1px solid rgba(217, 179, 108, .35);
+            box-shadow: 0 18px 45px rgba(15, 3, 7, .42);
+        }
+
+        .letter-paper {
+            background-color: var(--cream);
+            background-image: linear-gradient(rgba(217, 179, 108, .12) 1px, transparent 1px);
+            background-size: 100% 30px;
+            border: 1px solid #ead5ac;
+            box-shadow: 0 35px 100px rgba(0, 0, 0, .72);
+        }
+
+        .folder-back { background: #8c5960; border-color: rgba(217, 179, 108, .35); }
+        .folder-front { background: linear-gradient(145deg, #a76871, #78414b); }
+
+        @media (max-width: 767px) {
+            .hero-layout { padding-top: 6rem; padding-bottom: 4rem; }
+            .hero-copy { text-align: center; }
+        }
     </style>
 </head>
 
@@ -196,12 +328,16 @@
 
     <!-- 0. Lock Screen Landing (Gatekeeper) -->
     <div id="lockScreen"
-        class="fixed inset-0 z-[999] flex flex-col items-center justify-center bg-gradient-to-b from-[#120002] via-[#2d0107] to-[#120002] px-4 text-center">
+        class="fixed inset-0 z-[999] flex flex-col items-center justify-center bg-gradient-to-b from-[#1b080d] via-[#481823] to-[#16070b] px-4 text-center">
         <div class="absolute inset-0 bg-cover bg-center opacity-10 pointer-events-none"
-            style="background-image: url('images/foto-utama.jpg');"></div>
+            style="background-image: url('images/foto1.jpg');"></div>
+        <span class="petal top-[14%] left-[12%] text-4xl">❀</span>
+        <span class="petal top-[28%] right-[14%] text-2xl">✿</span>
+        <span class="petal bottom-[16%] left-[20%] text-3xl">❀</span>
         <div
-            class="z-10 bg-white/5 border border-white/10 p-8 md:p-12 rounded-3xl shadow-2xl backdrop-blur-md max-w-md w-full transition-all duration-500">
-            <div class="text-6xl mb-6 animate-pulse">❤️</div>
+            class="z-10 mom-glass p-8 md:p-12 rounded-[2rem] max-w-md w-full transition-all duration-500">
+            <p class="gold-kicker mb-5">A little gift from your child</p>
+            <div class="text-6xl mb-4 animate-pulse">💐</div>
             <h1 class="text-3xl md:text-4xl font-cursive text-pink-300 mb-2">A Special Place for Mom ✨</h1>
             <p class="text-gray-300 text-sm md:text-base mb-8">Kejutan kecil ini dibuat khusus untuk Mama.<br>Masukkan PIN
                 untuk membuka hadiah istimewa ini.</p>
@@ -221,21 +357,39 @@
     <div id="mainContent" class="hidden opacity-0 transition-opacity duration-1000">
 
         <!-- 1. Hero Section -->
-        <section class="h-screen flex flex-col items-center justify-center relative px-4 text-center">
+        <section class="min-h-screen flex items-center justify-center relative px-5 overflow-hidden">
             <div class="absolute inset-0 z-0 bg-cover bg-center opacity-25"
-                style="background-image: url('images/foto-utama.jpg');"></div>
-            <div class="absolute inset-0 bg-gradient-to-t from-[#2d0107] to-transparent z-0"></div>
-            <div class="z-10 px-4">
-                <h1 class="text-5xl sm:text-7xl md:text-9xl font-cursive text-pink-300 mb-2 drop-shadow-2xl">Happy Birthday,</h1>
-                <p class="text-2xl sm:text-4xl md:text-6xl tracking-widest font-light text-white font-serif-elegant mt-2">MY MOM</p>
-                <div class="mt-8 sm:mt-12 text-pink-400 text-3xl sm:text-4xl animate-bounce">❤️</div>
+                style="background-image: url('images/foto1.jpg');"></div>
+            <div class="absolute inset-0 bg-gradient-to-r from-[#17080d]/95 via-[#3a1019]/80 to-[#17080d]/70 z-0"></div>
+            <span class="petal top-[12%] left-[8%] text-4xl z-10">❀</span>
+            <span class="petal bottom-[18%] right-[7%] text-3xl z-10">✿</span>
+            <span class="petal top-[20%] right-[32%] text-xl z-10">❀</span>
+            <div class="hero-layout z-10 w-full max-w-6xl grid md:grid-cols-2 items-center gap-12 md:gap-20 py-16">
+                <div class="hero-copy order-2 md:order-1">
+                    <p class="gold-kicker mb-5">05 · 07 · 1985 — A beautiful soul was born</p>
+                    <h1 class="hero-title text-6xl sm:text-7xl lg:text-8xl font-cursive leading-[.9] mb-5">Happy Birthday,<br>Mama</h1>
+                    <p class="text-lg md:text-xl font-serif-elegant italic text-[#f2d7d9] leading-relaxed max-w-lg">
+                        “Untuk perempuan pertama yang mengajariku arti cinta, rumah, dan ketulusan.”
+                    </p>
+                    <div class="mt-8 flex items-center gap-4 justify-center md:justify-start">
+                        <span class="w-14 h-px bg-[#d9b36c]"></span>
+                        <span class="text-[#d9b36c] text-xl">♥</span>
+                        <span class="w-14 h-px bg-[#d9b36c]"></span>
+                    </div>
+                </div>
+                <div class="order-1 md:order-2 flex justify-center">
+                    <div class="hero-portrait">
+                        <img src="images/foto1.jpg" alt="Foto Mama tersayang">
+                    </div>
+                </div>
             </div>
         </section>
 
         <!-- 2. Message Section -->
         <section class="min-h-screen flex items-center justify-center px-6 py-20">
             <div
-                class="max-w-xl bg-white/5 border border-white/10 p-8 rounded-2xl shadow-2xl backdrop-blur-md text-center transition-all duration-500 hover:border-pink-500/20">
+                class="max-w-2xl mom-glass p-8 md:p-12 rounded-[2rem] text-center transition-all duration-500 hover:border-pink-200/40">
+                <p class="gold-kicker mb-5">From my heart to yours</p>
                 <h2 class="text-3xl md:text-4xl font-serif-elegant text-pink-300 font-bold mb-6">Untuk Mama Tersayang...</h2>
                 <p class="text-gray-300 leading-relaxed italic text-xl">
                     "Terima kasih telah menjadi rumah pertamaku, pelukan paling hangat, dan orang yang selalu menyayangiku tanpa syarat. Aku bersyukur terlahir sebagai anak Mama."
