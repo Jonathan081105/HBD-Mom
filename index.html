@@ -301,6 +301,15 @@
             padding: 120px 5vw;
             background: var(--paper);
         }
+        .gallery-hint {
+            display: none;
+            margin: 0 0 20px;
+            color: var(--rose);
+            font-size: 12px;
+            font-weight: 600;
+            letter-spacing: .16em;
+            text-transform: uppercase;
+        }
         .final-grid {
             max-width: 1150px;
             margin: auto;
@@ -373,13 +382,133 @@
         }
 
         @media (max-width: 500px) {
-            .intro { padding: 95px 24px; }
-            .photo.one, .photo.four { height: 440px; }
-            .photo.two, .photo.three { height: 320px; }
-            .final-grid { gap: 10px; }
-            .final-grid img, .final-grid img:nth-child(2) { height: 360px; }
-            .final-grid img:nth-child(2) { height: 730px; }
-            .letter { padding: 55px 35px; }
+            .lock { padding: 16px; }
+            .lock-card {
+                padding: 34px 22px;
+                border-radius: 22px;
+            }
+            .lock-flower { font-size: 40px; }
+            .lock h1 { font-size: 36px; }
+            .lock p { margin: 8px 0; font-size: 14px; }
+            .pin {
+                width: 170px;
+                margin: 8px 0;
+                font-size: 22px;
+            }
+            .open-button {
+                min-height: 52px;
+                margin-top: 14px;
+            }
+
+            .hero-copy {
+                min-height: 58vh;
+                padding: 82px 22px 55px;
+            }
+            .hero h2 { font-size: clamp(52px, 17vw, 72px); }
+            .hero-note {
+                margin-top: 22px;
+                padding-left: 18px;
+                font-size: 16px;
+            }
+            .hero-photo { min-height: 58vh; }
+            .hero-date {
+                right: 16px;
+                bottom: 16px;
+                padding: 10px 13px;
+                font-size: 9px;
+            }
+
+            .intro { padding: 86px 22px; }
+            .intro blockquote {
+                font-size: 27px;
+                line-height: 1.45;
+            }
+
+            .story { padding: 80px 16px; }
+            .story-heading { margin-bottom: 45px; padding: 0 6px; }
+            .story-heading h3 { font-size: 41px; }
+            .gallery {
+                display: block;
+            }
+            .photo.one,
+            .photo.two,
+            .photo.three,
+            .photo.four {
+                width: 100%;
+                height: min(72vh, 570px);
+                margin: 0 0 48px;
+            }
+            .photo figcaption {
+                padding: 0 4px;
+                font-size: 14px;
+                line-height: 1.55;
+            }
+
+            .gratitude-image { min-height: 62vh; }
+            .gratitude-copy { padding: 80px 22px; }
+            .gratitude h3,
+            .apology h3,
+            .wish h3 { font-size: 39px; }
+            .gratitude-copy p {
+                font-size: 16px;
+                line-height: 1.8;
+            }
+
+            .apology { padding: 78px 14px; }
+            .apology::before {
+                top: -25px;
+                font-size: 125px;
+            }
+            .letter {
+                padding: 52px 29px;
+                box-shadow: 0 24px 60px rgba(83,48,45,.15);
+            }
+            .letter::before { inset: 9px; }
+            .letter p {
+                font-size: 15.5px;
+                line-height: 1.78;
+            }
+            .signature {
+                margin-top: 32px !important;
+                font-size: 32px !important;
+            }
+
+            .final-gallery {
+                padding: 80px 0 80px 16px;
+                overflow: hidden;
+            }
+            .gallery-hint { display: block; }
+            .final-grid {
+                max-width: none;
+                display: flex;
+                gap: 14px;
+                overflow-x: auto;
+                padding: 5px 16px 25px 0;
+                scroll-snap-type: x mandatory;
+                scrollbar-width: none;
+            }
+            .final-grid::-webkit-scrollbar { display: none; }
+            .final-grid img,
+            .final-grid img:nth-child(2) {
+                width: 78vw;
+                min-width: 78vw;
+                height: 62vh;
+                max-height: 540px;
+                object-fit: cover;
+                scroll-snap-align: center;
+            }
+
+            .wish { padding: 95px 20px 75px; }
+            .wish p { font-size: 15.5px; line-height: 1.8; }
+            .music {
+                margin-top: 38px;
+                padding: 7px;
+                border-radius: 13px;
+            }
+            footer {
+                padding: 25px 15px;
+                font-size: 10px;
+            }
         }
 
         @media (prefers-reduced-motion: reduce) {
@@ -470,6 +599,7 @@
         </section>
 
         <section class="final-gallery">
+            <p class="gallery-hint">Geser untuk melihat kenangan →</p>
             <div class="final-grid reveal">
                 <img src="images/kecil1.jpg" alt="Perjalanan Mama">
                 <img src="images/kecil2.jpg" alt="Kenangan Mama">
